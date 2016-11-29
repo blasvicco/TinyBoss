@@ -7,7 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		693AF3261DECB78400B8559E /* organism.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693AF3241DECB78400B8559E /* organism.cpp */; };
 		695EDFAD1DD36E3D0023EFBB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 695EDFAC1DD36E3D0023EFBB /* main.cpp */; };
+		695EDFB91DD374460023EFBB /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 695EDFB81DD374460023EFBB /* OpenGL.framework */; };
+		695EDFBF1DD376EB0023EFBB /* environment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 695EDFBE1DD376EB0023EFBB /* environment.cpp */; };
+		695EDFC11DD3794E0023EFBB /* moskitos.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 695EDFC01DD3794E0023EFBB /* moskitos.cpp */; };
+		695EDFC31DD379E70023EFBB /* net.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 695EDFC21DD379E70023EFBB /* net.cpp */; };
+		695EDFC51DD37ACC0023EFBB /* perceptron.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 695EDFC41DD37ACC0023EFBB /* perceptron.cpp */; };
+		695EDFCB1DD37CAC0023EFBB /* layer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 695EDFCA1DD37CAC0023EFBB /* layer.cpp */; };
+		698A8E2A1DD3E633004E92EC /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 698A8E291DD3E633004E92EC /* SDL2.framework */; };
+		69C75C2E1DE9FEB5003AD979 /* tinyboss.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69C75C2D1DE9FEB5003AD979 /* tinyboss.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,8 +32,27 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		693AF3241DECB78400B8559E /* organism.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = organism.cpp; sourceTree = "<group>"; };
+		693AF3251DECB78400B8559E /* organism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = organism.h; sourceTree = "<group>"; };
 		695EDFA91DD36E3D0023EFBB /* TinyBoss */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TinyBoss; sourceTree = BUILT_PRODUCTS_DIR; };
 		695EDFAC1DD36E3D0023EFBB /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		695EDFB31DD3713A0023EFBB /* environment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = environment.h; sourceTree = "<group>"; };
+		695EDFB41DD3728F0023EFBB /* moskitos.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = moskitos.h; sourceTree = "<group>"; };
+		695EDFB61DD373C20023EFBB /* SDL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SDL.h; path = ../../../../opt/local/include/SDL/SDL.h; sourceTree = "<group>"; };
+		695EDFB81DD374460023EFBB /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		695EDFBA1DD374B30023EFBB /* net.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = net.h; sourceTree = "<group>"; };
+		695EDFBC1DD375EC0023EFBB /* layer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = layer.h; sourceTree = "<group>"; };
+		695EDFBD1DD376640023EFBB /* perceptron.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = perceptron.h; sourceTree = "<group>"; };
+		695EDFBE1DD376EB0023EFBB /* environment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = environment.cpp; sourceTree = "<group>"; };
+		695EDFC01DD3794E0023EFBB /* moskitos.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = moskitos.cpp; sourceTree = "<group>"; };
+		695EDFC21DD379E70023EFBB /* net.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = net.cpp; sourceTree = "<group>"; };
+		695EDFC41DD37ACC0023EFBB /* perceptron.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = perceptron.cpp; sourceTree = "<group>"; };
+		695EDFC81DD37C270023EFBB /* libSDL.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL.a; path = ../../../../opt/local/lib/libSDL.a; sourceTree = "<group>"; };
+		695EDFCA1DD37CAC0023EFBB /* layer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = layer.cpp; sourceTree = "<group>"; };
+		695EDFCC1DD37DB50023EFBB /* libSDLmain.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDLmain.a; path = ../../../../opt/local/lib/libSDLmain.a; sourceTree = "<group>"; };
+		698A8E291DD3E633004E92EC /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		69C75C2C1DE9FE9A003AD979 /* tinyboss.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tinyboss.h; sourceTree = "<group>"; };
+		69C75C2D1DE9FEB5003AD979 /* tinyboss.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyboss.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +60,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				698A8E2A1DD3E633004E92EC /* SDL2.framework in Frameworks */,
+				695EDFB91DD374460023EFBB /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +73,7 @@
 			children = (
 				695EDFAB1DD36E3D0023EFBB /* TinyBoss */,
 				695EDFAA1DD36E3D0023EFBB /* Products */,
+				695EDFB51DD373C20023EFBB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,8 +89,34 @@
 			isa = PBXGroup;
 			children = (
 				695EDFAC1DD36E3D0023EFBB /* main.cpp */,
+				695EDFB31DD3713A0023EFBB /* environment.h */,
+				695EDFB41DD3728F0023EFBB /* moskitos.h */,
+				695EDFBA1DD374B30023EFBB /* net.h */,
+				695EDFBC1DD375EC0023EFBB /* layer.h */,
+				695EDFBD1DD376640023EFBB /* perceptron.h */,
+				695EDFBE1DD376EB0023EFBB /* environment.cpp */,
+				695EDFC01DD3794E0023EFBB /* moskitos.cpp */,
+				695EDFC21DD379E70023EFBB /* net.cpp */,
+				695EDFC41DD37ACC0023EFBB /* perceptron.cpp */,
+				695EDFCA1DD37CAC0023EFBB /* layer.cpp */,
+				69C75C2C1DE9FE9A003AD979 /* tinyboss.h */,
+				69C75C2D1DE9FEB5003AD979 /* tinyboss.cpp */,
+				693AF3241DECB78400B8559E /* organism.cpp */,
+				693AF3251DECB78400B8559E /* organism.h */,
 			);
 			path = TinyBoss;
+			sourceTree = "<group>";
+		};
+		695EDFB51DD373C20023EFBB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				698A8E291DD3E633004E92EC /* SDL2.framework */,
+				695EDFCC1DD37DB50023EFBB /* libSDLmain.a */,
+				695EDFC81DD37C270023EFBB /* libSDL.a */,
+				695EDFB81DD374460023EFBB /* OpenGL.framework */,
+				695EDFB61DD373C20023EFBB /* SDL.h */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -120,6 +177,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				695EDFAD1DD36E3D0023EFBB /* main.cpp in Sources */,
+				695EDFC51DD37ACC0023EFBB /* perceptron.cpp in Sources */,
+				695EDFCB1DD37CAC0023EFBB /* layer.cpp in Sources */,
+				693AF3261DECB78400B8559E /* organism.cpp in Sources */,
+				69C75C2E1DE9FEB5003AD979 /* tinyboss.cpp in Sources */,
+				695EDFC11DD3794E0023EFBB /* moskitos.cpp in Sources */,
+				695EDFBF1DD376EB0023EFBB /* environment.cpp in Sources */,
+				695EDFC31DD379E70023EFBB /* net.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,6 +280,14 @@
 		695EDFB11DD36E3D0023EFBB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/local/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -223,6 +295,14 @@
 		695EDFB21DD36E3D0023EFBB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/local/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -246,6 +326,7 @@
 				695EDFB21DD36E3D0023EFBB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

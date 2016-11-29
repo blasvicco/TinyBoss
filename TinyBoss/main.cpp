@@ -7,9 +7,15 @@
 //
 
 #include <iostream>
+#include <time.h>
+#include "environment.h"
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+using namespace std;
+
+int main() {
+    srand((int)(time(0)));
+    Environment Env = Environment();
+    Env.start();
+    
     return 0;
 }
