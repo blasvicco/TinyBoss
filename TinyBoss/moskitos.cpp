@@ -124,7 +124,7 @@ void Moskitos::learnToFly(vector<float> inputs) {
 }
 
 void Moskitos::chooseTarget() {
-    foodTarget = - 1;
+    foodTarget = 0;
     for (int i = (int)foodDeltas.size() - 1; i >= 0; i--) {
         foodDeltas[i] /= maxDelta > 0 ? maxDelta : 1;
         foodAmount[i] /= maxFood > 0 ? maxFood : 1;
@@ -136,7 +136,7 @@ void Moskitos::chooseTarget() {
             foodTarget = i;
         }
     }
-    memoryFoodTarget = memoryFoodTarget == -1 ? foodTarget : memoryFoodTarget;
+    memoryFoodTarget = memoryFoodTarget == -1 || foodDeltas.size() == 1 ? foodTarget : memoryFoodTarget;
     if (memoryFoodTarget != foodTarget) {
         if ((foodAmount[memoryFoodTarget] < 0.0)
             || (foodAmount[foodTarget] - foodAmount[memoryFoodTarget] > 0.2)) {
