@@ -3,7 +3,7 @@ This is a Computer Vs Computer game implemented on C++ (Xcode) using Object Orie
 The game is about 2 different organism that try to survive in an environment that you can configure.
 
 ##### Online video:
-https://www.youtube.com/watch?v=yrzPFohNEeQ&ab_channel=BlasVicco
+https://youtu.be/yrzPFohNEeQ
 
 
 ##### Some of the technologies used in this project are:
