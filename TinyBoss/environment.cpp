@@ -15,7 +15,7 @@ Environment::Environment() {
 void Environment::start() {
     int window_flags = SDL_WINDOW_OPENGL;
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-    SDL_Window *window = SDL_CreateWindow("TinyBoss", 0, 0, window_width, window_height, window_flags);
+    SDL_Window *window = SDL_CreateWindow("TinyBoss", 150, 150, window_width, window_height, window_flags);
     if (window != NULL) {
         SDL_GLContext glcontext = SDL_GL_CreateContext(window);
         if (glcontext != NULL) {
@@ -97,11 +97,13 @@ void Environment::main_loop_function(SDL_Window *window) {
             // REPRODUCE MOSKO
             if (Moskos[i].reproduce() && moskosNumber < maxMoskosNumber) {
                 Moskitos *newMosko = new Moskitos(moskosInitialLife, window_width, window_height);
-                pos p = Moskos[i].getPos();
-                newMosko->setPos(p);
-                Moskos.push_back(*newMosko);
-                moskosNumber++;
-                Moskos[i].spendEnergy(moskosInitialLife/2);
+                pos p = getNearbyPos(Moskos[i].getPos(), moskosSize);
+                if (!samePos(p, Moskos[i].getPos())) {
+                    newMosko->setPos(p);
+                    Moskos.push_back(*newMosko);
+                    moskosNumber++;
+                    Moskos[i].spendEnergy(moskosInitialLife/2);
+                }
             }
             
             // IF STARVING CHANGE COLOR
@@ -217,20 +219,8 @@ pos Environment::getRandPos(int bodySize) {
 
 pos Environment::getNearbyPos(pos p, int size) {
     pos newPos = p;
-    for (unsigned int i = -2; i < 3; i++) {
-        for (unsigned int j = -2; j < 3; j++) {
-            newPos.x = p.x + i; newPos.y = p.y + j;
-            for (int l = 0; l < moskosNumber; l++) {
-                pos tmp = Moskos[l].getPos();
-                if (!collide(tmp, newPos, size)) {
-                    newPos = edge(p, newPos, size);
-                    if (!samePos(newPos, p)) {
-                        return newPos;
-                    }
-                }
-            }
-        }
-    }
+    newPos.x += rand() % 6 - 2.5;
+    newPos.y += rand() % 6 - 2.5;
     return newPos;
 }
 
@@ -239,16 +229,16 @@ bool Environment::samePos(pos a, pos b) {
 }
 
 pos Environment::edge(pos moveFrom, pos moveTo, int sizeObj) {
-    if (moveTo.x + sizeObj >= window_width) moveTo.x = moveFrom.x;
-    if (moveTo.x - sizeObj <= 0) moveTo.x = moveFrom.x;
-    if (moveTo.y + sizeObj >= window_height) moveTo.y = moveFrom.y;
-    if (moveTo.y - sizeObj <= 0) moveTo.y = moveFrom.y;
+    if (moveTo.x + sizeObj >= window_width - 5) moveTo.x = moveFrom.x;
+    if (moveTo.x - sizeObj <= 5) moveTo.x = moveFrom.x;
+    if (moveTo.y + sizeObj >= window_height - 5) moveTo.y = moveFrom.y;
+    if (moveTo.y - sizeObj <= 5) moveTo.y = moveFrom.y;
     return moveTo;
 }
 
 bool Environment::collide(pos p, pos moveTo, int size) {
-    return (((p.x - 2 * size <= moveTo.x) && (p.x + 2 * size >= moveTo.x))
-            && ((p.y - 2 * size <= moveTo.y) && (p.y + 2 * size >= moveTo.y)));
+    return (((p.x - 2 * size <= moveTo.x + 1) && (p.x + 2 * size >= moveTo.x - 1))
+            && ((p.y - 2 * size <= moveTo.y + 1) && (p.y + 2 * size >= moveTo.y - 1)));
 }
 
 bool Environment::onBoss(pos buzzP, pos p) {
@@ -280,8 +270,8 @@ pos Environment::moveMosko(int i) {
             }
             c--;
         }
-        moveTo = move ? moveTo : Moskos[i].getPos();
         moveTo = edge(Moskos[i].getPos(), moveTo, moskosSize);
+        moveTo = move ? moveTo : Moskos[i].getPos();
     }
     return moveTo;
 }

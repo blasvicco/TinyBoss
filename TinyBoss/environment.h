@@ -18,7 +18,7 @@
 #define window_width  800
 #define window_height 600
 #define moskosInitialNumber 30
-#define maxMoskosNumber 120
+#define maxMoskosNumber 100
 #define bossSize 20
 #define moskosSize 2
 #define moskosInitialLife 50000
