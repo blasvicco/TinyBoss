@@ -16,7 +16,7 @@ classNet::~classNet() {
 }
 
 int classNet::feedForward() {
-    vector<float> temp(inputs);
+    vector<double> temp(inputs);
     for (int i = 0; i < nl; i++) {
         Layer[i].setInputs(temp);
         temp = Layer[i].getOutput();
@@ -25,7 +25,7 @@ int classNet::feedForward() {
     return 1;
 }
 
-void classNet::ini(int ninput, int noutput, vector<int> numppl, float initialMu) {
+void classNet::ini(int ninput, int noutput, vector<int> numppl, double initialMu) {
     classLayer *tmp;
     inputs.clear();
     outputs.clear();
@@ -51,17 +51,17 @@ void classNet::ini(int ninput, int noutput, vector<int> numppl, float initialMu)
     nl = Layer.size();
 }
 
-void classNet::setInputs(vector<float> input) {
+void classNet::setInputs(vector<double> input) {
     inputs = input;
 }
 
-vector<float> classNet::getOutput() {
+vector<double> classNet::getOutput() {
     outputs.clear();
     feedForward();
     return outputs;
 }
 
-void classNet::fix(vector <float> errors) {
+void classNet::fix(vector <double> errors) {
     int i = 1;
     long index;
     do {

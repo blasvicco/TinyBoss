@@ -8,7 +8,7 @@
 
 #include "moskitos.h"
 
-Moskitos::Moskitos(float initialLife, float width, float height) {
+Moskitos::Moskitos(double initialLife, double width, double height) {
     winWidth = width;
     winHeight = height;
     lifeReference = initialLife;
@@ -16,11 +16,13 @@ Moskitos::Moskitos(float initialLife, float width, float height) {
     vector<int> nppl;
     nppl.clear();
     nppl.push_back(4);
-    FlyBrain.ini(2, 2, nppl, 0);
+    nppl.push_back(6);
+    nppl.push_back(3);
+    FlyBrain.ini(2, 2, nppl, 0.2);
     
     nppl.clear();
     nppl.push_back(3);
-    AvoidObstacleBrain.ini(6, 2, nppl, 0);
+    AvoidObstacleBrain.ini(6, 2, nppl, 0.4);
 }
 
 pos Moskitos::move() {
@@ -28,7 +30,7 @@ pos Moskitos::move() {
     chooseTarget();
     if (memoryFoodTarget != -1) {
         pos buzzP = foodPos[memoryFoodTarget];
-        vector<float> temp;
+        vector<double> temp;
         temp.push_back(buzzP.x);
         temp.push_back(buzzP.y);
         moveTo = fly(temp);
@@ -51,7 +53,7 @@ void Moskitos::shakeAvoidObtsacleBrain() {
     AvoidObstacleBrain.ini(6, 2, nppl, 0);
 }
 
-pos Moskitos::avoidObstacle(vector<float> inputs) {
+pos Moskitos::avoidObstacle(vector<double> inputs) {
     if (memoryFoodTarget == -1) return myPos;
     
     pos buzzP = foodPos[memoryFoodTarget];
@@ -62,13 +64,13 @@ pos Moskitos::avoidObstacle(vector<float> inputs) {
     
     pos p;
     AvoidObstacleBrain.setInputs(inputs);
-    vector<float> output(AvoidObstacleBrain.getOutput());
+    vector<double> output(AvoidObstacleBrain.getOutput());
     p.x = myPos.x + (0.5 * output[0]);
     p.y = myPos.y + (0.5 * output[1]);
     return p;
 }
 
-float Moskitos::rotten() {
+double Moskitos::rotten() {
     return fabsf(life);
 }
 
@@ -80,9 +82,9 @@ void Moskitos::blink() {
     foodPos.clear();
 }
 
-void Moskitos::lookForFood(pos buzzP, float buzzLife) {
+void Moskitos::lookForFood(pos buzzP, double buzzLife) {
     if (buzzLife > 0) {
-        float delta = powf(powf(buzzP.x - myPos.x, 2) + powf(buzzP.y - myPos.y, 2), 0.5);
+        double delta = powf(powf(buzzP.x - myPos.x, 2) + powf(buzzP.y - myPos.y, 2), 0.5);
         maxDelta = delta > maxDelta ? delta : maxDelta;
         foodDeltas.push_back(delta);
         maxFood = buzzLife > maxFood ? buzzLife : maxFood;
@@ -95,20 +97,20 @@ void Moskitos::lookForFood(pos buzzP, float buzzLife) {
     }
 }
 
-pos Moskitos::fly(vector<float> inputs) {
+pos Moskitos::fly(vector<double> inputs) {
     pos p;
     FlyBrain.setInputs(inputs);
-    vector<float> output(FlyBrain.getOutput());
+    vector<double> output(FlyBrain.getOutput());
     p.x = myPos.x + (0.5 * output[0]);
     p.y = myPos.y + (0.5 * output[1]);
     return p;
 }
 
-void Moskitos::learnToFly(vector<float> inputs) {
-    vector<float> output(FlyBrain.getOutput());
-    vector<float> wished = {0, 0, 0, 0};
-    vector<float> error = {0, 0, 0, 0};
-    if (fabsf(inputs[0]) + fabsf(inputs[1]) > 0) {
+void Moskitos::learnToFly(vector<double> inputs) {
+    vector<double> output(FlyBrain.getOutput());
+    vector<double> wished = {0, 0, 0, 0};
+    vector<double> error = {0, 0, 0, 0};
+    if (fabs(inputs[0]) + fabs(inputs[1]) > 0) {
         wished[0] = inputs[0] >= myPos.x/winWidth - 0.005 && inputs[0] <= myPos.x/winWidth + 0.005 ?
             0.0 : ( inputs[0] > myPos.x/winWidth ? 1.0 : -1.0);
         wished[1] = inputs[1] >= myPos.y/winHeight - 0.005 && inputs[1] <= myPos.y/winHeight + 0.005 ?
@@ -119,24 +121,33 @@ void Moskitos::learnToFly(vector<float> inputs) {
         error[0] = wished[0] - output[0];
         error[1] = wished[1] - output[1];
         //cout << "Error: " << error[0] << " " << error[1] << endl;
-        FlyBrain.fix(error);
+        if (fabs(error[0]) == 2 && fabs(error[1]) == 2) {
+            vector<int> nppl;
+            nppl.clear();
+            nppl.push_back(4);
+            nppl.push_back(6);
+            nppl.push_back(3);
+            FlyBrain.ini(2, 2, nppl, 0.2);
+        } else {
+            FlyBrain.fix(error);
+        }
     }
 }
 
 void Moskitos::chooseTarget() {
-    foodTarget = 0;
+    foodTarget = -1;
     for (int i = (int)foodDeltas.size() - 1; i >= 0; i--) {
         foodDeltas[i] /= maxDelta > 0 ? maxDelta : 1;
         foodAmount[i] /= maxFood > 0 ? maxFood : 1;
     }
-    float max = 0;
+    double max = 0;
     for (int i = 0; i < foodDeltas.size(); i++) {
         if (max < foodDeltas[i] * foodAmount[i]) {
             max =  foodDeltas[i] * foodAmount[i];
             foodTarget = i;
         }
     }
-    memoryFoodTarget = memoryFoodTarget == -1 || foodDeltas.size() == 1 ? foodTarget : memoryFoodTarget;
+    memoryFoodTarget = memoryFoodTarget > foodDeltas.size() -1 || (memoryFoodTarget == -1 && foodTarget != -1) ? foodTarget : memoryFoodTarget;
     if (memoryFoodTarget != foodTarget) {
         if ((foodAmount[memoryFoodTarget] < 0.0)
             || (foodAmount[foodTarget] - foodAmount[memoryFoodTarget] > 0.2)) {

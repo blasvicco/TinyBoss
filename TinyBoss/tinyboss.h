@@ -15,23 +15,23 @@ class TinyBoss : public Organism {
 private:
     classNet FearBrain;
     classNet FoodBrain;
-    float size;
-    vector<float> buzzInputFear;
+    double size;
+    vector<double> buzzInputFear;
     vector<int> buzzInputFearCount;
-    float maxMoskoEne;
-    vector<float> buzzInputFood;
+    double maxMoskoEne;
+    vector<double> buzzInputFood;
     vector<int> buzzInputFoodCount;
-    float maxMoskoDeadEne = 0;
+    double maxMoskoDeadEne = 0;
     
 public:
-    TinyBoss(float initialLife, float initialSize);
+    TinyBoss(double initialLife, double initialSize);
     pos move();
     void eat();
     bool reproduce();
     void learnToMove();
     void blink();
-    void lookForMoskos(pos moskoPos, float moskoLife);
-    void lookForFood(pos moskoPos, float moskoRotten);
+    void lookForMoskos(pos moskoPos, double moskoLife);
+    void lookForFood(pos moskoPos, double moskoRotten);
 };
 
 #endif /* tinyboss_h */

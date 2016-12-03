@@ -13,19 +13,19 @@
 class classLayer {
 private:
     vector <classPerceptron> Perceptron;
-    vector <float> inputs;
-    vector <float> outputs;
-    vector <float> delta;
+    vector <double> inputs;
+    vector <double> outputs;
+    vector <double> delta;
     int np;
     int ni;
     
 public:
-    classLayer(int nip, int npercep, float initialMu);
+    classLayer(int nip, int npercep, double initialMu);
     ~classLayer();
-    void setInputs(vector <float> input);
-    vector<float> getOutput();
-    void setError(vector<float> error);
-    vector<float> fix();
+    void setInputs(vector <double> input);
+    vector<double> getOutput();
+    void setError(vector<double> error);
+    vector<double> fix();
 };
 
 #endif /* layer_h */

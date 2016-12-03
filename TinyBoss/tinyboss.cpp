@@ -8,7 +8,7 @@
 
 #include "tinyboss.h"
 
-TinyBoss::TinyBoss(float initialLife, float initialSize) {
+TinyBoss::TinyBoss(double initialLife, double initialSize) {
     lifeReference = initialLife;
     life = initialLife;
     size = initialSize;
@@ -37,17 +37,17 @@ pos TinyBoss::move() {
     pos p = myPos;
     FearBrain.setInputs(buzzInputFear);
     FoodBrain.setInputs(buzzInputFood);
-    vector<float> fearOutput(FearBrain.getOutput());
-    vector<float> foodOutput(FoodBrain.getOutput());
+    vector<double> fearOutput(FearBrain.getOutput());
+    vector<double> foodOutput(FoodBrain.getOutput());
     //cout << "F Input: " << buzzInputFear[0] << " " << buzzInputFear[1] << " " << buzzInputFear[2] << " " << buzzInputFear[3] << endl;
     //cout << "F Input: " << fearOutput[0] << " " << fearOutput[1] << " " << fearOutput[2] << " " << fearOutput[3] << endl;
-    if (fabsf(buzzInputFear[0]) + fabsf(buzzInputFear[1]) + fabsf(buzzInputFear[2]) + fabsf(buzzInputFear[3]) > 0) {
+    if (fabs(buzzInputFear[0]) + fabs(buzzInputFear[1]) + fabs(buzzInputFear[2]) + fabs(buzzInputFear[3]) > 0) {
         p.x += (0.3 * (fearOutput[1] + fearOutput[3]));
         p.y += (0.3 * (fearOutput[0] + fearOutput[2]));
     }
     //cout << "F Input: " << buzzInputFood[0] << " " << buzzInputFood[1] << " " << buzzInputFood[2] << " " << buzzInputFood[3] << endl;
     //cout << "F Output: " << foodOutput[0] << " " << foodOutput[1] << " " << foodOutput[2] << " " << foodOutput[3] << endl;
-    if (fabsf(buzzInputFood[0]) + fabsf(buzzInputFood[1]) + fabsf(buzzInputFood[2]) + fabsf(buzzInputFood[3]) > 0) {
+    if (fabs(buzzInputFood[0]) + fabs(buzzInputFood[1]) + fabs(buzzInputFood[2]) + fabs(buzzInputFood[3]) > 0) {
         p.x += (0.8 * (foodOutput[1] + foodOutput[3]));
         p.y += (0.8 * (foodOutput[0] + foodOutput[2]));
     }
@@ -63,11 +63,11 @@ bool TinyBoss::reproduce() {
 }
 
 void TinyBoss::learnToMove() {
-    vector<float> fearOutput(FearBrain.getOutput());
-    vector<float> foodOutput(FoodBrain.getOutput());
-    vector<float> wished = {0, 0, 0, 0};
-    vector<float> error = {0, 0, 0, 0};
-    if (fabsf(buzzInputFear[0]) + fabsf(buzzInputFear[1]) + fabsf(buzzInputFear[2]) + fabsf(buzzInputFear[3]) > 0) {
+    vector<double> fearOutput(FearBrain.getOutput());
+    vector<double> foodOutput(FoodBrain.getOutput());
+    vector<double> wished = {0, 0, 0, 0};
+    vector<double> error = {0, 0, 0, 0};
+    if (fabs(buzzInputFear[0]) + fabs(buzzInputFear[1]) + fabs(buzzInputFear[2]) + fabs(buzzInputFear[3]) > 0) {
         wished[0] = buzzInputFear[0] == buzzInputFear[2] ? 0 : (buzzInputFear[0] > buzzInputFear[2] ? -1.0 : 1.0);
         wished[1] = buzzInputFear[1] == buzzInputFear[3] ? 0 : (buzzInputFear[1] > buzzInputFear[3] ? -1.0 : 1.0);
         wished[2] = buzzInputFear[0] == buzzInputFear[2] ? 0 : (buzzInputFear[2] > buzzInputFear[0] ? 1.0 : -1.0);
@@ -80,7 +80,7 @@ void TinyBoss::learnToMove() {
     }
     
     //cout << "F buzzInputFood: " << buzzInputFood[0] << " " << buzzInputFood[1] << " " << buzzInputFood[2] << " " << buzzInputFood[3] << endl;
-    if (fabsf(buzzInputFood[0]) + fabsf(buzzInputFood[1]) + fabsf(buzzInputFood[2]) + fabsf(buzzInputFood[3]) > 0) {
+    if (fabs(buzzInputFood[0]) + fabs(buzzInputFood[1]) + fabs(buzzInputFood[2]) + fabs(buzzInputFood[3]) > 0) {
         wished[0] = buzzInputFood[0] == buzzInputFood[2] ? 0 : (buzzInputFood[0] > buzzInputFood[2] ? 1.0 : -1.0);
         wished[1] = buzzInputFood[1] == buzzInputFood[3] ? 0 : (buzzInputFood[1] > buzzInputFood[3] ? 1.0 : -1.0);
         wished[2] = buzzInputFood[0] == buzzInputFood[2] ? 0 : (buzzInputFood[2] > buzzInputFood[0] ? -1.0 : 1.0);
@@ -105,7 +105,7 @@ void TinyBoss::blink() {
     maxMoskoDeadEne = 0.0;
 }
 
-void TinyBoss::lookForMoskos(pos moskoPos, float moskoLife) {
+void TinyBoss::lookForMoskos(pos moskoPos, double moskoLife) {
     if ( ((moskoPos.y > myPos.y) && (moskoPos.y < myPos.y + size*3))
         && ((moskoPos.x >= myPos.x - size*1.5) && (moskoPos.x <= myPos.x + size*1.5)) ) {
         //up
@@ -139,7 +139,7 @@ void TinyBoss::lookForMoskos(pos moskoPos, float moskoLife) {
     }
 }
 
-void TinyBoss::lookForFood(pos moskoPos, float moskoRotten) {
+void TinyBoss::lookForFood(pos moskoPos, double moskoRotten) {
     if ( ((moskoPos.y > myPos.y+size) && (moskoPos.y < myPos.y + size*16))
         && ((moskoPos.x >= myPos.x - size*4) && (moskoPos.x <= myPos.x + size*4)) ) {
         //up

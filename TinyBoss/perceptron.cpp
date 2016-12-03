@@ -7,14 +7,14 @@
 
 #include "perceptron.h"
 
-classPerceptron::classPerceptron(int nip, float initialMu) {
+classPerceptron::classPerceptron(int nip, double initialMu) {
     mu = initialMu > 0 ? initialMu : mu;
     ponderation.clear();
     inputs.clear();
     output = 0;
     ni = nip;
-    float tmp;
-    float signe;
+    double tmp;
+    double signe;
     for (int i = 0; i <= ni; i++) {
         tmp = 0;
         signe = rand() % 2 == 1 ? -1.0 : 1.0;
@@ -27,14 +27,14 @@ classPerceptron::~classPerceptron() {
     //liberar memoria
 }
 
-int classPerceptron::setInputs(vector<float> input) {
+int classPerceptron::setInputs(vector<double> input) {
     inputs.clear();
     inputs = input;
     return 1;
 }
 
-float classPerceptron::getOutput() {
-    float sum = 0;
+double classPerceptron::getOutput() {
+    double sum = 0;
     for (int i = 0; i < ni; i++) {
         sum += inputs[i] * ponderation[i];
     }
@@ -44,18 +44,23 @@ float classPerceptron::getOutput() {
     return output;
 }
 
-void classPerceptron::setError(float error) {
+void classPerceptron::setError(double error) {
     dEtotaldOutput = error;
 }
 
-vector<float> classPerceptron::fix(vector<float> inputs) {
-    float delta = dEtotaldOutput;
-    vector<float> deltaBackErrors;
+vector<double> classPerceptron::fix(vector<double> inputs) {
+    double delta = dEtotaldOutput;
+    vector<double> deltaBackErrors;
     for (int i = 0; i <= ni; i++) {
+        //cout << delta * ponderation[i]<< endl;
         deltaBackErrors.push_back(delta * ponderation[i]);
-        float tmp = mu * delta * inputs[i];
-        if ((ponderation[i] + tmp > -FLT_MAX) && (ponderation[i] + tmp < FLT_MAX)) {
+        double tmp = mu * delta * inputs[i];
+        if ((ponderation[i] + tmp > -DBL_MAX) && (ponderation[i] + tmp < DBL_MAX)) {
             ponderation[i] += tmp;
+        } else {
+            double signe;
+            signe = rand() % 2 == 1 ? -1.0 : 1.0;
+            ponderation[i] = ((rand() % 100)/100.0) * signe;
         }
     }
     return deltaBackErrors;

@@ -7,7 +7,7 @@
 
 #include "layer.h"
 
-classLayer::classLayer(int nip, int nperce, float initialMu) {
+classLayer::classLayer(int nip, int nperce, double initialMu) {
     inputs.clear();
     outputs.clear();
     np = nperce;
@@ -24,14 +24,14 @@ classLayer::~classLayer() {
     //liberar memoria
 }
 
-void classLayer::setInputs(vector<float> input) {
+void classLayer::setInputs(vector<double> input) {
     inputs.clear();
     inputs = input;
 }
 
-vector<float> classLayer::getOutput() {
+vector<double> classLayer::getOutput() {
     outputs.clear();
-    float tmp = 0;
+    double tmp = 0;
     for (int i = 0; i < np; i++) {
         Perceptron[i].setInputs(inputs);
         tmp = Perceptron[i].getOutput();
@@ -40,15 +40,15 @@ vector<float> classLayer::getOutput() {
     return outputs;
 }
 
-void classLayer::setError(vector<float> error) {
+void classLayer::setError(vector<double> error) {
     for (int i = 0; i < np; i++) {
         Perceptron[i].setError(error[i]);
     }
 }
 
-vector<float> classLayer::fix() {
-    vector<float> deltaBackErrors;
-    vector<float> deltaBackErrorsTotal(ni, 0.0);
+vector<double> classLayer::fix() {
+    vector<double> deltaBackErrors;
+    vector<double> deltaBackErrorsTotal(ni, 0.0);
     for (int i = 0; i < np; i++) {
         deltaBackErrors = Perceptron[i].fix(inputs);
         for (int j = 0; j < ni; j++) {

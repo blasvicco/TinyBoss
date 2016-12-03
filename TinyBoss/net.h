@@ -13,8 +13,8 @@
 class classNet {
 private:
     vector <classLayer> Layer;//capas
-    vector <float> inputs;//entradas
-    vector <float> outputs;//salidas obtenidas
+    vector <double> inputs;//entradas
+    vector <double> outputs;//salidas obtenidas
     unsigned long ni;//numero de entradas
     unsigned long no;//numero de salidas
     unsigned long nl;//numero de capas
@@ -24,10 +24,10 @@ private:
 public:
     classNet();
     ~classNet();
-    void ini(int ninput, int noutput, vector <int> numppl, float initialMu);
-    void setInputs(vector <float> input);
-    vector <float> getOutput();
-    void fix(vector <float> errors);
+    void ini(int ninput, int noutput, vector <int> numppl, double initialMu);
+    void setInputs(vector <double> input);
+    vector <double> getOutput();
+    void fix(vector <double> errors);
 };
 
 #endif /* net_h */

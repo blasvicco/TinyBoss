@@ -55,6 +55,7 @@ void Environment::main_loop_function(SDL_Window *window) {
         //FOR EACH MOSKO
         for (int i = 0; i < moskosNumber; i++) {
             bool isDead = Moskos[i].dead();
+            deadCounter += isDead ? 1 : 0;
             glLoadIdentity();
             glTranslated(0, 0, 0);
             glBegin (GL_QUADS);
@@ -63,7 +64,6 @@ void Environment::main_loop_function(SDL_Window *window) {
             Moskos[i].blink();
             pos cpos = Moskos[i].getPos();
             //FOR EACH BOSS
-            deadCounter += isDead ? 1 : 0;
             for (int j = 0; j < bossNumber; j++) {
                 if (isDead) { // IF MOSKO DEAD
                     glColor3ub(200, 200, 200);
@@ -247,8 +247,8 @@ pos Environment::edge(pos moveFrom, pos moveTo, int sizeObj) {
 }
 
 bool Environment::collide(pos p, pos moveTo, int size) {
-    return (((p.x - 2 * size < moveTo.x) && (p.x + 2 * size > moveTo.x))
-            && ((p.y - 2 * size < moveTo.y) && (p.y + 2 * size > moveTo.y)));
+    return (((p.x - 2 * size <= moveTo.x) && (p.x + 2 * size >= moveTo.x))
+            && ((p.y - 2 * size <= moveTo.y) && (p.y + 2 * size >= moveTo.y)));
 }
 
 bool Environment::onBoss(pos buzzP, pos p) {
@@ -267,7 +267,7 @@ pos Environment::moveMosko(int i) {
                 pos p = Moskos[j].getPos();
                 if ( (j != i) &&  collide(p, moveTo, moskosSize)) {
                     if (c == 3) Moskos[i].shakeAvoidObtsacleBrain();
-                    vector<float> inputToAvoidObstacle;
+                    vector<double> inputToAvoidObstacle;
                     inputToAvoidObstacle.push_back(p.x/window_width);
                     inputToAvoidObstacle.push_back(p.y/window_height);
                     moveTo = Moskos[i].avoidObstacle(inputToAvoidObstacle);

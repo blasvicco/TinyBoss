@@ -15,30 +15,30 @@ class Moskitos : public Organism {
 private:
     classNet FlyBrain;
     classNet AvoidObstacleBrain;
-    vector<float> foodDeltas;
-    vector<float> foodAmount;
+    vector<double> foodDeltas;
+    vector<double> foodAmount;
     vector<pos> foodPos;
-    float maxDelta;
-    float maxFood;
+    double maxDelta;
+    double maxFood;
     int foodTarget;
     int memoryFoodTarget = -1;
-    float winWidth;
-    float winHeight;
+    double winWidth;
+    double winHeight;
     
-    pos fly(vector<float> inputs);
-    void learnToFly(vector<float> inputs);
+    pos fly(vector<double> inputs);
+    void learnToFly(vector<double> inputs);
     void chooseTarget();
     
 public:
-    Moskitos(float initialLife, float width, float height);
+    Moskitos(double initialLife, double width, double height);
     pos move();
     void eat();
     bool reproduce();
-    pos avoidObstacle(vector<float> inputs);
+    pos avoidObstacle(vector<double> inputs);
     void shakeAvoidObtsacleBrain();
-    float rotten();
+    double rotten();
     void blink();
-    void lookForFood(pos buzzP, float buzzLife);
+    void lookForFood(pos buzzP, double buzzLife);
 };
 
 #endif /* moskitos_h */
