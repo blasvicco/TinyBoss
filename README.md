@@ -1,6 +1,5 @@
 # TinyBoss
-This is a Computer Vs Computer game implemented on C++ (Xcode) using Object Oriented Design pattern, SDL/OpenGL and net (Artificial Neural Network).
-
+This is a Computer Vs Computer game implemented on C++ (Xcode) using Object Oriented programming, SDL/OpenGL and net (Artificial Neural Network).
 The game is about 2 different organism that try to survive in an environment that you can configure.
 
 ##### Online video:
