@@ -13,12 +13,12 @@ TinyBoss::TinyBoss(double initialLife, double initialSize) {
     life = initialLife;
     size = initialSize;
     
-    vector<int> nppl;
+    vector<unsigned int> nppl;
     nppl.push_back(6);
     nppl.push_back(8);
     nppl.push_back(5);
-    FearBrain.ini(4, 4, nppl, 0);
-    FoodBrain.ini(4, 4, nppl, 0);
+    FearBrain.ini(4, 4, nppl, TANH, 0);
+    FoodBrain.ini(4, 4, nppl, TANH, 0);
 
     blink();
 }
@@ -35,8 +35,8 @@ pos TinyBoss::move() {
         }
     }
     pos p = myPos;
-    FearBrain.setInputs(buzzInputFear);
-    FoodBrain.setInputs(buzzInputFood);
+    FearBrain.setInput(buzzInputFear);
+    FoodBrain.setInput(buzzInputFood);
     vector<double> fearOutput(FearBrain.getOutput());
     vector<double> foodOutput(FoodBrain.getOutput());
     //cout << "F Input: " << buzzInputFear[0] << " " << buzzInputFear[1] << " " << buzzInputFear[2] << " " << buzzInputFear[3] << endl;
@@ -76,7 +76,7 @@ void TinyBoss::learnToMove() {
         error[1] = wished[1] - fearOutput[1];
         error[2] = wished[2] - fearOutput[2];
         error[3] = wished[3] - fearOutput[3];
-        FearBrain.fix(error);
+        FearBrain.backFix(error);
     }
     
     //cout << "F buzzInputFood: " << buzzInputFood[0] << " " << buzzInputFood[1] << " " << buzzInputFood[2] << " " << buzzInputFood[3] << endl;
@@ -91,7 +91,7 @@ void TinyBoss::learnToMove() {
         error[2] = wished[2] - foodOutput[2];
         error[3] = wished[3] - foodOutput[3];
         //cout << "F Error: " << error[0] << " " << error[1] << " " << error[2] << " " << error[3] << endl;
-        FoodBrain.fix(error);
+        FoodBrain.backFix(error);
     }
 }
 

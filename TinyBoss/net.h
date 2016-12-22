@@ -13,21 +13,21 @@
 class classNet {
 private:
     vector <classLayer> Layer;//capas
-    vector <double> inputs;//entradas
-    vector <double> outputs;//salidas obtenidas
-    unsigned long ni;//numero de entradas
-    unsigned long no;//numero de salidas
-    unsigned long nl;//numero de capas
-    vector <int> nppl;//numero de perceptrones por capa
-    int feedForward();
+    vector <double> input;//entradas
+    vector <double> output;//salidas obtenidas
+    unsigned int ni;//numero de entradas
+    unsigned int no;//numero de salidas
+    unsigned int nl;//numero de capas
+    vector <unsigned int> nppl;//numero de perceptrones por capa
+    void feedForward(unsigned int deep);
     
 public:
     classNet();
     ~classNet();
-    void ini(int ninput, int noutput, vector <int> numppl, double initialMu);
-    void setInputs(vector <double> input);
+    void ini(unsigned int ninput, unsigned int noutput, vector <unsigned int> numppl, unsigned int type, double initialMu);
+    void setInput(vector <double> inp);
     vector <double> getOutput();
-    void fix(vector <double> errors);
+    void backFix(vector <double> error);
 };
 
 #endif /* net_h */

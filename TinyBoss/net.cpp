@@ -15,59 +15,57 @@ classNet::~classNet() {
     //liberar memoria
 }
 
-int classNet::feedForward() {
-    vector<double> temp(inputs);
-    for (int i = 0; i < nl; i++) {
-        Layer[i].setInputs(temp);
-        temp = Layer[i].getOutput();
-    }
-    outputs = temp;
-    return 1;
-}
-
-void classNet::ini(int ninput, int noutput, vector<int> numppl, double initialMu) {
+void classNet::ini(unsigned int ninput, unsigned int noutput, vector <unsigned int> numppl, unsigned int type, double initialMu) {
     classLayer *tmp;
-    inputs.clear();
-    outputs.clear();
+    input.clear();
+    output.clear();
     nppl.clear();
-    nl = numppl.size();
+    nl = (unsigned int)numppl.size();
     nppl = numppl;
     ni = ninput;
     no = noutput;
     Layer.clear();
     if (nl == 0) {
-        tmp = new classLayer(ninput, noutput, initialMu);
+        tmp = new classLayer(ninput, noutput, type, initialMu);
         Layer.push_back(*tmp);
     } else {
-        tmp = new classLayer(ninput, nppl[0], initialMu);
+        tmp = new classLayer(ninput, nppl[0], type, initialMu);
         Layer.push_back(*tmp);
-        for (int i = 0; i < nl - 1; i++) {
-            tmp = new classLayer(nppl[i], nppl[i + 1], initialMu);
+        for (unsigned int i = 0; i < nl - 1; i++) {
+            tmp = new classLayer(nppl[i], nppl[i + 1], type, initialMu);
             Layer.push_back(*tmp);
         }
-        tmp = new classLayer(nppl[nl - 1], noutput, initialMu);
+        tmp = new classLayer(nppl[nl - 1], noutput, type, initialMu);
         Layer.push_back(*tmp);
     }
-    nl = Layer.size();
+    nl = (unsigned int)Layer.size();
 }
 
-void classNet::setInputs(vector<double> input) {
-    inputs = input;
+void classNet::setInput(vector<double> inp) {
+    input = inp;
 }
 
 vector<double> classNet::getOutput() {
-    outputs.clear();
-    feedForward();
-    return outputs;
+    output.clear();
+    feedForward(nl);
+    return output;
 }
 
-void classNet::fix(vector <double> errors) {
-    int i = 1;
-    long index;
-    do {
-        index = nl - i;
-        Layer[index].setError(errors);
-        errors = Layer[index].fix();
-        i++;
-    } while(index > 1);
+void classNet::backFix(vector <double> error) {
+    int index = nl - 1;
+    while(index >= 0) {
+        Layer[index].setError(error);
+        error = Layer[index].backFix();
+        index--;
+    }
+}
+
+//Private
+void classNet::feedForward(unsigned int deep) {
+    vector<double> temp(input);
+    for (unsigned int i = 0; i < deep; i++) {
+        Layer[i].setInput(temp);
+        temp = Layer[i].getOutput();
+    }
+    output = temp;
 }

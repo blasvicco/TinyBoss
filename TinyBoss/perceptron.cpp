@@ -7,61 +7,58 @@
 
 #include "perceptron.h"
 
-classPerceptron::classPerceptron(int nip, double initialMu) {
+classPerceptron::classPerceptron(unsigned int nip, unsigned int type, double initialMu) {
+    activationType = type;
     mu = initialMu > 0 ? initialMu : mu;
     ponderation.clear();
-    inputs.clear();
+    input.clear();
     output = 0;
     ni = nip;
     double tmp;
-    double signe;
-    for (int i = 0; i <= ni; i++) {
+    for (unsigned int i = 0; i < ni; i++) {
         tmp = 0;
-        signe = rand() % 2 == 1 ? -1.0 : 1.0;
-        tmp = ((rand() % 100)/100.0) * signe;
+        tmp = ((rand() % 100)/100.0) * (rand() % 2 == 1 ? -1.0 : 1.0);
         ponderation.push_back(tmp);
     }
+    ponderation.push_back(rand() % 2 == 1 ? -1.0 : 1.0); //adding bias
 }
 
 classPerceptron::~classPerceptron() {
     //liberar memoria
 }
 
-int classPerceptron::setInputs(vector<double> input) {
-    inputs.clear();
-    inputs = input;
-    return 1;
+void classPerceptron::setInput(vector<double> inp) {
+    input.clear();
+    input = inp;
 }
 
 double classPerceptron::getOutput() {
     double sum = 0;
-    for (int i = 0; i < ni; i++) {
-        sum += inputs[i] * ponderation[i];
+    for (unsigned int i = 0; i < ni; i++) {
+        sum += input[i] * ponderation[i];
     }
     
-    sum += ponderation[ni]; //+ via
-    output = (2.0 / (1.0 + exp(-sum))) - 1.0; //sigmoide
+    sum += ponderation[ni]; //+ bias
+    output = Activation::f(activationType, sum);
     return output;
 }
 
 void classPerceptron::setError(double error) {
-    dEtotaldOutput = error;
+    dEtotaldOutput = Activation::fprime(activationType, output) * error;
 }
 
-vector<double> classPerceptron::fix(vector<double> inputs) {
+vector<double> classPerceptron::backFix(vector<double> inp) {
     double delta = dEtotaldOutput;
     vector<double> deltaBackErrors;
-    for (int i = 0; i <= ni; i++) {
-        //cout << delta * ponderation[i]<< endl;
-        deltaBackErrors.push_back(delta * ponderation[i]);
-        double tmp = mu * delta * inputs[i];
+    for (unsigned int i = 0; i < ni; i++) {
+        double tmp = mu * delta * inp[i];
         if ((ponderation[i] + tmp > -DBL_MAX) && (ponderation[i] + tmp < DBL_MAX)) {
             ponderation[i] += tmp;
-        } else {
-            double signe;
-            signe = rand() % 2 == 1 ? -1.0 : 1.0;
-            ponderation[i] = ((rand() % 100)/100.0) * signe;
         }
+        deltaBackErrors.push_back(delta * ponderation[i]);
     }
+    ponderation[ni] += mu * delta;
     return deltaBackErrors;
 }
+
+

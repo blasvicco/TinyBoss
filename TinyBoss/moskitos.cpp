@@ -13,16 +13,16 @@ Moskitos::Moskitos(double initialLife, double width, double height) {
     winHeight = height;
     lifeReference = initialLife;
     life = initialLife;
-    vector<int> nppl;
+    vector<unsigned int> nppl;
     nppl.clear();
     nppl.push_back(4);
     nppl.push_back(6);
     nppl.push_back(3);
-    FlyBrain.ini(2, 2, nppl, 0.2);
+    FlyBrain.ini(2, 2, nppl, TANH, 0.2);
     
     nppl.clear();
     nppl.push_back(3);
-    AvoidObstacleBrain.ini(6, 2, nppl, 0.4);
+    AvoidObstacleBrain.ini(6, 2, nppl, TANH, 0.4);
 }
 
 pos Moskitos::move() {
@@ -48,9 +48,9 @@ bool Moskitos::reproduce() {
 }
 
 void Moskitos::shakeAvoidObtsacleBrain() {
-    vector<int> nppl;
+    vector<unsigned int> nppl;
     nppl.push_back(3);
-    AvoidObstacleBrain.ini(6, 2, nppl, 0);
+    AvoidObstacleBrain.ini(6, 2, nppl, TANH, 0);
 }
 
 pos Moskitos::avoidObstacle(vector<double> inputs) {
@@ -63,7 +63,7 @@ pos Moskitos::avoidObstacle(vector<double> inputs) {
     inputs.push_back(myPos.y/winHeight);
     
     pos p;
-    AvoidObstacleBrain.setInputs(inputs);
+    AvoidObstacleBrain.setInput(inputs);
     vector<double> output(AvoidObstacleBrain.getOutput());
     p.x = myPos.x + (0.5 * output[0]);
     p.y = myPos.y + (0.5 * output[1]);
@@ -99,7 +99,7 @@ void Moskitos::lookForFood(pos buzzP, double buzzLife) {
 
 pos Moskitos::fly(vector<double> inputs) {
     pos p;
-    FlyBrain.setInputs(inputs);
+    FlyBrain.setInput(inputs);
     vector<double> output(FlyBrain.getOutput());
     p.x = myPos.x + (0.5 * output[0]);
     p.y = myPos.y + (0.5 * output[1]);
@@ -122,14 +122,14 @@ void Moskitos::learnToFly(vector<double> inputs) {
         error[1] = wished[1] - output[1];
         //cout << "Error: " << error[0] << " " << error[1] << endl;
         if (fabs(error[0]) == 2 && fabs(error[1]) == 2) {
-            vector<int> nppl;
+            vector<unsigned int> nppl;
             nppl.clear();
             nppl.push_back(4);
             nppl.push_back(6);
             nppl.push_back(3);
-            FlyBrain.ini(2, 2, nppl, 0.2);
+            FlyBrain.ini(2, 2, nppl, SIGMOID, 0.2);
         } else {
-            FlyBrain.fix(error);
+            FlyBrain.backFix(error);
         }
     }
 }

@@ -13,24 +13,27 @@
 #include <float.h>
 #include <math.h>
 
+#include "activation.h"
+
 using namespace std;
 
 class classPerceptron {
 private:
-    int ni;
+    unsigned int activationType;
+    unsigned int ni;
     vector <double> ponderation;
-    vector <double> inputs;
+    vector <double> input;
     double output;
     double mu = 0.6;
     double dEtotaldOutput = 0.0;
     
 public:
-    classPerceptron(int nip, double initialMu);
+    classPerceptron(unsigned int nip, unsigned int type, double initialMu);
     ~classPerceptron();
-    int setInputs(vector <double> input);
+    void setInput(vector <double> inp);
     double getOutput();
     void setError(double error);
-    vector<double> fix(vector<double> inputs);
+    vector<double> backFix(vector<double> inp);
 };
 
 #endif /* perceptron_h */

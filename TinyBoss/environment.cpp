@@ -15,7 +15,7 @@ Environment::Environment() {
 void Environment::start() {
     int window_flags = SDL_WINDOW_OPENGL;
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-    SDL_Window *window = SDL_CreateWindow("TinyBoss", 150, 150, window_width, window_height, window_flags);
+    SDL_Window *window = SDL_CreateWindow("TinyBoss", 140, 120, window_width, window_height, window_flags);
     if (window != NULL) {
         SDL_GLContext glcontext = SDL_GL_CreateContext(window);
         if (glcontext != NULL) {

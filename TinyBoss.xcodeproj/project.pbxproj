@@ -15,6 +15,7 @@
 		695EDFC31DD379E70023EFBB /* net.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 695EDFC21DD379E70023EFBB /* net.cpp */; };
 		695EDFC51DD37ACC0023EFBB /* perceptron.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 695EDFC41DD37ACC0023EFBB /* perceptron.cpp */; };
 		695EDFCB1DD37CAC0023EFBB /* layer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 695EDFCA1DD37CAC0023EFBB /* layer.cpp */; };
+		6968E9451E0C8EFE006CD86F /* activation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6968E9431E0C8EFE006CD86F /* activation.cpp */; };
 		698A8E2A1DD3E633004E92EC /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 698A8E291DD3E633004E92EC /* SDL2.framework */; };
 		69C75C2E1DE9FEB5003AD979 /* tinyboss.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69C75C2D1DE9FEB5003AD979 /* tinyboss.cpp */; };
 /* End PBXBuildFile section */
@@ -50,6 +51,8 @@
 		695EDFC81DD37C270023EFBB /* libSDL.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL.a; path = ../../../../opt/local/lib/libSDL.a; sourceTree = "<group>"; };
 		695EDFCA1DD37CAC0023EFBB /* layer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = layer.cpp; sourceTree = "<group>"; };
 		695EDFCC1DD37DB50023EFBB /* libSDLmain.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDLmain.a; path = ../../../../opt/local/lib/libSDLmain.a; sourceTree = "<group>"; };
+		6968E9431E0C8EFE006CD86F /* activation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = activation.cpp; sourceTree = "<group>"; };
+		6968E9441E0C8EFE006CD86F /* activation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = activation.h; sourceTree = "<group>"; };
 		698A8E291DD3E633004E92EC /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		69C75C2C1DE9FE9A003AD979 /* tinyboss.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tinyboss.h; sourceTree = "<group>"; };
 		69C75C2D1DE9FEB5003AD979 /* tinyboss.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyboss.cpp; sourceTree = "<group>"; };
@@ -88,6 +91,8 @@
 		695EDFAB1DD36E3D0023EFBB /* TinyBoss */ = {
 			isa = PBXGroup;
 			children = (
+				6968E9431E0C8EFE006CD86F /* activation.cpp */,
+				6968E9441E0C8EFE006CD86F /* activation.h */,
 				695EDFAC1DD36E3D0023EFBB /* main.cpp */,
 				695EDFB31DD3713A0023EFBB /* environment.h */,
 				695EDFB41DD3728F0023EFBB /* moskitos.h */,
@@ -145,7 +150,7 @@
 		695EDFA11DD36E3D0023EFBB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Blas Eugenio Vicco";
 				TargetAttributes = {
 					695EDFA81DD36E3D0023EFBB = {
@@ -179,6 +184,7 @@
 				695EDFAD1DD36E3D0023EFBB /* main.cpp in Sources */,
 				695EDFC51DD37ACC0023EFBB /* perceptron.cpp in Sources */,
 				695EDFCB1DD37CAC0023EFBB /* layer.cpp in Sources */,
+				6968E9451E0C8EFE006CD86F /* activation.cpp in Sources */,
 				693AF3261DECB78400B8559E /* organism.cpp in Sources */,
 				69C75C2E1DE9FEB5003AD979 /* tinyboss.cpp in Sources */,
 				695EDFC11DD3794E0023EFBB /* moskitos.cpp in Sources */,
@@ -208,6 +214,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -255,6 +262,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
