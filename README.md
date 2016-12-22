@@ -4,6 +4,7 @@ The game is about 2 different organism that try to survive in an environment tha
 
 ##### Online video:
 https://youtu.be/yrzPFohNEeQ
+https://youtu.be/QFJEMmRNc9Q
 
 
 ##### Some of the technologies used in this project are:
