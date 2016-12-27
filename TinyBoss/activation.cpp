@@ -11,7 +11,7 @@
 double Activation::f(unsigned int type, double sum) {
     switch (type) {
         case SIGMOID : {
-            return 1 / (1.0 + exp(-1.0 * sum));
+            return 1 / (1.0 + exp(-sum));
         } break;
         default:
         case TANH: {

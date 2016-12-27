@@ -22,7 +22,7 @@
 #define bossSize 20
 #define moskosSize 2
 #define moskosInitialLife 50000
-#define bossInitialNumber 3
+#define bossInitialNumber 4
 #define bossInitialLife 80000
 #define starvingIndicator 5000
 

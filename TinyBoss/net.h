@@ -28,6 +28,7 @@ public:
     void setInput(vector <double> inp);
     vector <double> getOutput();
     void backFix(vector <double> error);
+    void temper(unsigned int deep, unsigned int k);
 };
 
 #endif /* net_h */

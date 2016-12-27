@@ -14,6 +14,7 @@
 #include <math.h>
 
 #include "activation.h"
+#include "random.h"
 
 using namespace std;
 
@@ -34,6 +35,9 @@ public:
     double getOutput();
     void setError(double error);
     vector<double> backFix(vector<double> inp);
+    double feedBackware(double output, unsigned int wIndex);
+    void forFix(double error, unsigned int wIndex);
+    void forBiasFix(double error);
 };
 
 #endif /* perceptron_h */

@@ -60,12 +60,18 @@ void classNet::backFix(vector <double> error) {
     }
 }
 
+void classNet::temper(unsigned int deep, unsigned int k) {
+    for (unsigned int i = 0; i < deep; i++) {
+        feedForward(i+1);
+        Layer[i].temper(k);
+    }
+}
+
 //Private
 void classNet::feedForward(unsigned int deep) {
-    vector<double> temp(input);
+    output = input;
     for (unsigned int i = 0; i < deep; i++) {
-        Layer[i].setInput(temp);
-        temp = Layer[i].getOutput();
+        Layer[i].setInput(output);
+        output = Layer[i].getOutput();
     }
-    output = temp;
 }

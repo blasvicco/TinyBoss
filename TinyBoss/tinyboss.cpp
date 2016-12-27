@@ -14,11 +14,9 @@ TinyBoss::TinyBoss(double initialLife, double initialSize) {
     size = initialSize;
     
     vector<unsigned int> nppl;
-    nppl.push_back(6);
-    nppl.push_back(8);
-    nppl.push_back(5);
-    FearBrain.ini(4, 4, nppl, TANH, 0);
-    FoodBrain.ini(4, 4, nppl, TANH, 0);
+    nppl.push_back(3);
+    FearBrain.ini(4, 4, nppl, TANH, 0.8);
+    FoodBrain.ini(4, 4, nppl, TANH, 0.4);
 
     blink();
 }
@@ -55,7 +53,7 @@ pos TinyBoss::move() {
 }
 
 void TinyBoss::eat() {
-    life += 10000;
+    life += 3000;
 }
 
 bool TinyBoss::reproduce() {

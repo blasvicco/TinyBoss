@@ -17,10 +17,10 @@ classPerceptron::classPerceptron(unsigned int nip, unsigned int type, double ini
     double tmp;
     for (unsigned int i = 0; i < ni; i++) {
         tmp = 0;
-        tmp = ((rand() % 100)/100.0) * (rand() % 2 == 1 ? -1.0 : 1.0);
+        tmp = ((Random::dur01()/2.0) + 0.5) * (double)Random::sign();
         ponderation.push_back(tmp);
     }
-    ponderation.push_back(rand() % 2 == 1 ? -1.0 : 1.0); //adding bias
+    ponderation.push_back((double)Random::sign()); //adding bias
 }
 
 classPerceptron::~classPerceptron() {
@@ -59,6 +59,18 @@ vector<double> classPerceptron::backFix(vector<double> inp) {
     }
     ponderation[ni] += mu * delta;
     return deltaBackErrors;
+}
+
+double classPerceptron::feedBackware(double output, unsigned int wIndex) {
+    return ponderation[wIndex] * output;
+}
+
+void classPerceptron::forFix(double error, unsigned int wIndex) {
+    ponderation[wIndex] += mu * error;
+}
+
+void classPerceptron::forBiasFix(double error) {
+    ponderation[ni] += mu * error;
 }
 
 

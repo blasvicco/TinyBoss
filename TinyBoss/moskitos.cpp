@@ -15,10 +15,8 @@ Moskitos::Moskitos(double initialLife, double width, double height) {
     life = initialLife;
     vector<unsigned int> nppl;
     nppl.clear();
-    nppl.push_back(4);
-    nppl.push_back(6);
     nppl.push_back(3);
-    FlyBrain.ini(2, 2, nppl, TANH, 0.2);
+    FlyBrain.ini(2, 2, nppl, TANH, 0.4);
     
     nppl.clear();
     nppl.push_back(3);
